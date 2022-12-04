@@ -28,3 +28,5 @@
        reverse
        (take 3)
        (reduce +)))
+
+(utils/register-day 1 [p1-1 p1-2])

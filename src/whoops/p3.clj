@@ -33,3 +33,6 @@
        (map first)
        (map char->priority)
        (reduce +)))
+
+
+(utils/register-day 3 [p3-1 p3-2])

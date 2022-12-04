@@ -1,12 +1,23 @@
 (ns whoops.aoc2022
+  (:require
+   [whoops.p1]
+   [whoops.p2]
+   [whoops.p3]
+   [whoops.p4]
+   [whoops.utils :as utils])
   (:gen-class))
 
-(defn greet
-  "Callable entry point to the application."
-  [data]
-  (println (str "Hello, " (or (:name data) "World") "!")))
+(defn print-day [day]
+  (when-let [problems (@utils/days day)]
+    (println "----------")
+    (println (str "DAY " day))
+    (time (println "Problem 1" ((first problems))))
+    (time (println "Problem 2" ((second problems))))
+    (println "----------")))
 
 (defn -main
   "I don't do a whole lot ... yet."
-  [& args]
-  (greet {:name (first args)}))
+  [& _args]
+  (prn @utils/days)
+  (doseq [day (-> @utils/days keys sort)]
+    (print-day day)))

@@ -40,3 +40,5 @@
   (->> day4-data
        (filter #(apply overlap? %))
        count))
+
+(utils/register-day 4 [p4-1 p4-2])

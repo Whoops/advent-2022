@@ -78,3 +78,5 @@
        (map find-play)
        (map score-round)
        (reduce +)))
+
+(utils/register-day 2 [p1 p2])
