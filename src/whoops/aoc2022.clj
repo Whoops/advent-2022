@@ -11,8 +11,8 @@
   (when-let [problems (@utils/days day)]
     (println "----------")
     (println (str "DAY " day))
-    (time (println "Problem 1" ((first problems))))
-    (time (println "Problem 2" ((second problems))))
+    (time (println "Problem 1:" ((first problems))))
+    (time (println "Problem 2:" ((second problems))))
     (println "----------")))
 
 (defn -main
