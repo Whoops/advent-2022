@@ -3,7 +3,7 @@
    [whoops.utils :as utils]))
 
 (defn stack->col [i]
-  (+ 1 (* 4 (dec i))))
+  (inc (* 4 i)))
 
 (defn read-stack [line i]
   (let [letter (nth line (stack->col i))]
@@ -12,16 +12,15 @@
       letter)))
 
 (defn clean-stacks [stacks]
-  (reduce (fn [stacks i] (update stacks i #(->> %1 reverse (drop-while nil?)))) stacks (keys stacks)))
+  (mapv #(->> % reverse (drop-while nil?)) stacks))
 
 (defn parse-stacks [stacks]
-  (let [piles (range 1 10)]
+  (let [num-piles (-> stacks first count (- 3) (/ 4) inc)]
     (loop [lines (drop-last stacks)
-           stacks (sorted-map)]
+           stacks (repeat num-piles '())]
       (let [line (first lines)
-            new-stacks (reduce #(update %1 %2 conj (read-stack line %2)) stacks piles)
-            lines (rest lines)]
-        (if (seq lines)
+            new-stacks (map-indexed #(conj %2 (read-stack line %1)) stacks)]
+        (if-let [lines (seq (rest lines))]
           (recur lines new-stacks)
           (clean-stacks new-stacks))))))
 
@@ -39,30 +38,27 @@
   (->> "day5.txt"
        utils/file-lines
        (partition-by #(= "" %))
-       parse-day5))
+       parse-day5
+       vec))
 
-(defn do-move-p1 [stacks move]
+(defn do-move [stacks move reverse?]
   (let [[num source dest] move
-        picked (take num (stacks source))]
-    (-> stacks
-        (update source #(drop num %))
-        (update dest #(apply conj % picked)))))
-
-(defn do-move-p2 [stacks move]
-  (let [[num source dest] move
-        picked (take num (stacks source))]
+        source (dec source)
+        dest (dec dest)
+        picked (take num (stacks source))
+        picked (if reverse? (reverse picked) picked)]
     (-> stacks
         (update source #(drop num %))
         (update dest #(concat picked %)))))
 
 (defn p1 []
   (let [[stacks moves] day5-data
-        stacks (reduce do-move-p1 stacks moves)]
-    (apply str (map #(first (stacks %)) (-> stacks keys sort)))))
+        stacks (reduce #(do-move %1 %2 true) stacks moves)]
+    (apply str (map first stacks))))
 
 (defn p2 []
   (let [[stacks moves] day5-data
-        stacks (reduce do-move-p2 stacks moves)]
-    (apply str (map #(first (stacks %)) (-> stacks keys sort)))))
+        stacks (reduce #(do-move %1 %2 false) stacks moves)]
+    (apply str (map first stacks))))
 
 (utils/register-day 5 [p1 p2])
