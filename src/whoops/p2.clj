@@ -35,7 +35,8 @@
 
 (def day2-data
   (->> "day2.txt"
-       utils/file-lines))
+       utils/file-lines
+       vec))
 
 
 (defn round-result [[them me]]

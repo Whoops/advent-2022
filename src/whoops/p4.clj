@@ -14,7 +14,8 @@
 (def day4-data
   (->> "day4.txt"
        (utils/file-lines)
-       (map parse-line)))
+       (mapv parse-line)
+       vec))
 
 (defn eclipses? [[s1 e1] [s2 e2]]
   (and (<= s1 s2) (>= e1 e2)))

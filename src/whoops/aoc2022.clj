@@ -19,6 +19,5 @@
 (defn -main
   "I don't do a whole lot ... yet."
   [& _args]
-  (prn @utils/days)
   (doseq [day (-> @utils/days keys sort)]
     (print-day day)))

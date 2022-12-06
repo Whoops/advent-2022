@@ -11,7 +11,8 @@
 (def day3-data
   (->> "day3.txt"
        utils/file-lines
-       (map parse-line)))
+       (mapv parse-line)
+       vec))
 
 (defn char->priority [char]
   (if (Character/isLowerCase char)

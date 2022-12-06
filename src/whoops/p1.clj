@@ -8,7 +8,8 @@
       utils/file-lines
       (partition-by string/blank?)
       (remove #(= "" (first %)))
-      (map #(map parse-long %))))
+      (mapv #(map parse-long %))
+      vec))
 
 (defn elf-calories [elf]
   (reduce + elf))
