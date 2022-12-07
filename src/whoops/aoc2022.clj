@@ -6,6 +6,7 @@
    [whoops.p4]
    [whoops.p5]
    [whoops.p6]
+   [whoops.p7]
    [whoops.utils :as utils])
   (:gen-class))
 
