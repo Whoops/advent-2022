@@ -11,3 +11,12 @@
 
 (defn register-day [day [p1 p2]]
   (swap! days assoc day [p1 p2]))
+
+
+(defn grid-dims [grid]
+  [(count (first grid)) (count grid)])
+
+(defn grid-point [grid [x y]]
+ (-> grid
+     (nth y)
+     (nth x)))
