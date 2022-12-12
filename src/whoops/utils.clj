@@ -20,3 +20,20 @@
  (-> grid
      (nth y)
      (nth x)))
+
+(defn grid-of [[rows cols] val]
+  (->> val
+       (repeat rows)
+       vec
+       (repeat cols)
+       vec))
+
+(defn set-point [grid [x y] val]
+  (assoc-in grid [y x] val))
+
+(defn in-grid? [grid [x y]]
+  (let [[rows cols] (grid-dims grid)]
+    (and (>= x 0)
+         (< x rows)
+         (>= y 0)
+         (< y cols))))
