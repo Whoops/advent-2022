@@ -15,6 +15,8 @@
    [whoops.p13]
    [whoops.p14]
    [whoops.p15]
+   [whoops.p16]
+   [whoops.p17]
    [whoops.utils :as utils])
   (:gen-class))
 
