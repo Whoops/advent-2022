@@ -18,6 +18,7 @@
    ;[whoops.p16]
    [whoops.p17]
    [whoops.p18]
+   [whoops.p19]
    [whoops.utils :as utils])
   (:gen-class))
 
