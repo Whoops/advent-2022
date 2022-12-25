@@ -24,6 +24,7 @@
    [whoops.p22]
    [whoops.p23]
    [whoops.p24]
+   [whoops.p25]
    [whoops.utils :as utils])
   (:gen-class))
 
